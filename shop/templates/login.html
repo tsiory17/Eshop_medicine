@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+  <div class="col-md-6 col-lg-4">
+    <form method ="POST" action ="{%url 'login' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="usernmae" class="form-label">Username</label>
+        <input type="text" class="form-control" name="username" placeholder="Enter your username">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter your Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

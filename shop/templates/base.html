@@ -16,7 +16,49 @@
     </head>
     <body>
         <!-- Navigation-->
-         {%include 'navbar.html'%}
+        {% include 'navbar.html' %}
+
+        <style>
+          .alert {
+              padding: 0.5rem; /* Reduce padding */
+              margin-bottom: 0.5rem; /* Reduce margin */
+              font-size: 0.875rem; /* Adjust font size if needed */
+          }
+          .alert .btn-close {
+              margin-top: -0.25rem;
+          }
+          .d-flex.align-items-center svg {
+              height: 1rem; /* Adjust SVG icon size if needed */
+          }
+        </style>
+        
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                        {{ message }}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% elif message.tags == "success" %}
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    <div>
+                        {{ message }}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+
+       
+
+        
+        
 
          {% block content %}
          {% endblock %}
