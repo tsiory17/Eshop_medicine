@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product 
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
+from django import forms
 
 
 def home (request):
@@ -37,3 +41,4 @@ def logout_customer (request):
   logout(request)
   messages.success(request, "You have logged out successfully")
   return redirect ('home')
+
