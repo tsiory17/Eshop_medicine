@@ -6,6 +6,9 @@
     <form method ="POST" action= {%url 'register'%}>
       {% csrf_token %}
       
+      {{form.as_p}}
+      <br></br>
+      <button type = "submit" class = "btn btn-primary"> Register </button>
     
     </form>
   </div>
