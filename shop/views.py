@@ -10,6 +10,7 @@ from django.template.defaultfilters import slugify
 
 
 def home (request):
+  
   products = Product.objects.all()
   categorys = Category.objects.all()
   return render(request , 'home.html' , {'products': products , 'categorys' : categorys} )

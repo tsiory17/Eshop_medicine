@@ -19,10 +19,34 @@
        <p class="card-text">${{product.price}}</p>   
       {% endif %}
       
-      <a href="#" class="btn btn-primary">Add to cart</a>
+      <button type ="button" class="btn btn-primary"  id="add-product" value= {{product.id}}>Add to cart</button>
     </div>
   </div>
 </div>
 <br></br>
+<script>
+  console.log ({{product.id}})</script>
+ <script>
 
+  $(document).on('click','#add-product',function(e){
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url:'{% url 'add_cart' %}', 
+      data: {
+        product_id : $('#add-product').val(),
+        product_qty: $('#cart_quantity option:selected').text(),
+        csrfmiddlewaretoken: '{{csrf_token}}',
+        action: 'post'
+      },
+      success: function(json){
+        document.getElementById('cart_quantity').innerText = json.qty
+        console.log(json)
+      },
+      error: function(xhr,errmsg,err){
+  
+      }
+    });
+   })
+</script>  
 {% endblock %}
