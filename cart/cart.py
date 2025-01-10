@@ -22,6 +22,9 @@ class Cart ():
       
     self.session.modified = True 
     
+  def total (self):
+    pass
+    
   def quantity (self):
     return len(self.cart)
   
@@ -46,3 +49,13 @@ class Cart ():
     
     updated_cart = self.cart
     return updated_cart
+  
+  def delete(self,product):
+    product_id = str(product)
+  
+    if product_id in self.cart:
+     del self.cart[product_id]
+     self.session.modified = True
+     
+     
+  

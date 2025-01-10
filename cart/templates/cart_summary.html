@@ -40,7 +40,17 @@
                        
                       </div>
                       
-                      <div class="col-md-1 col-lg-1 col-xl-2 d-flex">
+                      {% comment %} <div class="col-md-1 col-lg-1 col-xl-2 d-flex">
+                            
+                      </div>  {% endcomment %}
+
+                        
+                        {% comment %} <button type ="button" class="btn btn-secondary ml-2 update-cart"  id="update-cart" data-index= {{product.id}}>Update</button> {% endcomment %}
+      
+                   
+       
+                      
+                      <div class="col-md-2 col-lg-2 col-xl-3 d-flex justify-content-between">
                         <select id="select{{product.id}}" class="form-select" aria-label="Default select example" style="width: auto;">
                           
                           
@@ -54,12 +64,11 @@
                           <option value="3">3</option>
                           <option value="4">4</option> 
                           <option value="5">5</option> 
-                        </select>                   
-                      </div> 
-
-                      <div class="col">    
-                        <button type ="button" class="btn btn-secondary ml-2 update-cart"  id="update-cart" data-index= {{product.id}}>Update</button>
-                    </div> 
+                        </select>              
+                        <button class="btn btn-success btn-sm rounded-0 update-cart" type="button" data-toggle="tooltip" data-placement="top" title="Edit" id="update-cart" data-index={{product.id}}><i class="fa fa-edit"></i> Save</button>
+                      </div>
+                      
+                      
 
                       
                    
@@ -75,7 +84,7 @@
                       {%endif%}
                     
                       <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                        <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+  <button  type = "button" class="text-muted delete-product" id ="" data-index = {{product.id}}><i class="fas fa-times"></i></a>
                       </div>
                     </div>
                     {%endfor%}
@@ -162,7 +171,29 @@
           }
         });
        })
+
+ //delete
+       $(document).on('click','.delete-product',function(e){
+        e.preventDefault();
+        var productId = $(this).data('index')
+        console.log($('#select' + productId + ' option:selected').text())
+        $.ajax({
+          type: "POST",
+          url:'{% url 'delete_cart' %}', 
+          data: {
+            product_id : productId,
+            csrfmiddlewaretoken: '{{csrf_token}}',
+            action: 'post'
+          },
+          success: function(json){
+            location.reload();
+          },
+          error: function(xhr,errmsg,err){
+      
+          }
+        });
+       })
     </script>  
-    </script>
+
 
 {% endblock %}
