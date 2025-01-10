@@ -18,9 +18,20 @@
       {% else %}
        <p class="card-text">${{product.price}}</p>   
       {% endif %}
-      
-      <button type ="button" class="btn btn-primary"  id="add-product" value= {{product.id}}>Add to cart</button>
-    </div>
+      <div class="row">
+        <div class="col-md-12 d-flex align-items-center">
+          <label for="quantity" class="me-2">Quantity:</label>
+          <select id="quantity_cart" class="form-select" aria-label="Default select example" style="width: auto;">
+            <option value="1">1</option>
+            <option value="2">2</option> 
+            <option value="3">3</option>
+            <option value="4">4</option> 
+            <option value="5">5</option> 
+          </select> 
+        </div> 
+       </div>
+
+     <div class="col-12 d-flex justify-content-center mt-3"> <button type="button" class="btn btn-primary" id="add-product" value="{{product.id}}">Add to cart</button> </div>    </div>
   </div>
 </div>
 <br></br>
@@ -35,7 +46,7 @@
       url:'{% url 'add_cart' %}', 
       data: {
         product_id : $('#add-product').val(),
-        product_qty: $('#cart_quantity option:selected').text(),
+        product_qty: $('#quantity_cart option:selected').text(),
         csrfmiddlewaretoken: '{{csrf_token}}',
         action: 'post'
       },

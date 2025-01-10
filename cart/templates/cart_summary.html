@@ -28,30 +28,42 @@
                     </div>
                     <hr class="my-4">
                     {%for product in cart_products%}
-                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                    <div class="row mb-4 d-flex justify-content-between align-items-center" data-product-id ="{{product.id}}" >
                       <div class="col-md-2 col-lg-2 col-xl-2">
                         <img
                           src="{{product.image.url}}"
                           class="img-fluid rounded-3" alt="{{product.name}}">
                       </div>
-                      <div class="col-md-3 col-lg-3 col-xl-3">
-                        <h6 class="text-muted"{{product.category}}t</h6>
-                        <h6 class="mb-0">{{product.name}}</h6>
+                      <div class="col-md-3 col-lg-3 col-l-3">
+                        <h5 class="mb-0">{{product.name}}</h5>
+                        <h6 class="text-muted">{{product.category}}</h6>
+                       
                       </div>
-                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                          onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                          <i class="fas fa-minus"></i>
-                        </button>
-  
-                        <input id="form1" min="0" name="quantity" value="1" type="number"
-                          class="form-control form-control-sm" />
-  
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                          onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                          <i class="fas fa-plus"></i>
-                        </button>
-                      </div>
+                      
+                      <div class="col-md-1 col-lg-1 col-xl-2 d-flex">
+                        <select id="select{{product.id}}" class="form-select" aria-label="Default select example" style="width: auto;">
+                          
+                          
+                          {%for key,value in quantities.items %}
+                            {%if key == product.id|slugify%}
+                            <option selected>{{value}}</option>
+                            {%endif%}
+                          {%endfor%}
+                          <option value="1">1</option>
+                          <option value="2">2</option> 
+                          <option value="3">3</option>
+                          <option value="4">4</option> 
+                          <option value="5">5</option> 
+                        </select>                   
+                      </div> 
+
+                      <div class="col">    
+                        <button type ="button" class="btn btn-secondary ml-2 update-cart"  id="update-cart" data-index= {{product.id}}>Update</button>
+                    </div> 
+
+                      
+                   
+
                       {%if product.is_sale%}
                       <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                         <h6 class="mb-0" style="color: red">$ <strike>{{product.price}}</strike> ${{product.sale_price}}</h6>
@@ -61,17 +73,13 @@
                         <h6 class="mb-0">$ {{product.price}}</h6>
                       </div>
                       {%endif%}
+                    
                       <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                         <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
                       </div>
                     </div>
                     {%endfor%}
                     <hr class="my-4">
-  
-                  
-  
-                  
-  
                 
   
                     <div class="pt-5">
@@ -128,8 +136,33 @@
         </div>
       </div>
     </div>
+    
   </section>
 
 
+    <script>
+      $(document).on('click','.update-cart',function(e){
+        e.preventDefault();
+        var productId = $(this).data('index')
+        console.log($('#select' + productId + ' option:selected').text())
+        $.ajax({
+          type: "POST",
+          url:'{% url 'update_cart' %}', 
+          data: {
+            product_id : productId,
+            product_qty: $('#select' + productId + ' option:selected').text(),
+            csrfmiddlewaretoken: '{{csrf_token}}',
+            action: 'post'
+          },
+          success: function(json){
+            location.reload();
+          },
+          error: function(xhr,errmsg,err){
+      
+          }
+        });
+       })
+    </script>  
+    </script>
 
 {% endblock %}
