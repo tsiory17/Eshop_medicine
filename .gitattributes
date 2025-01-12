@@ -1,1 +1,4 @@
 *.py linguist-detectable
+*.css linguist-language=CSS
+*.py linguist-language=Python
+*.css linguist-vendored
