@@ -1,0 +1,19 @@
+
+.header-container {
+   display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+  }
+
+.header-text { 
+  flex: 1; 
+  text-align: left;
+ } 
+.responsive-img {
+   max-width: 100px; 
+   height: auto; 
+  } 
+
+  .background-container { 
+    background-size: cover; /* Ensures the background image covers the entire container */ 
+    background-position: center; /* Centers the background image */ }

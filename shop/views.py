@@ -21,7 +21,8 @@ def about(request):
 
 def product (request, pk):
   product = Product.objects.get(id = pk)
-  return render (request,'product.html', {'product':product})
+  categorys = Category.objects.all()
+  return render (request,'product.html', {'product':product , 'categorys' : categorys})
 
 def login_customer (request):
   if request.method == "POST":

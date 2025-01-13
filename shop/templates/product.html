@@ -1,8 +1,10 @@
 {% extends "base.html"  %}
 
 {% block content %}
-<br></br>
-<div class="container d-flex justify-content-center align-items-center">
+
+<div style="background-color: rgb(168, 213, 169)">
+  <br></br>
+<div class="container d-flex justify-content-center align-items-center" >
   <div class="card" style="width: 18rem;">
     <img src="{{product.image.url}}" class="card-img-top" alt="..." style="border-top: solid 1px; border-left: solid 1px; border-right: solid 1px;">
     <div class="card-body" style="border-bottom: solid 1px; border-left: solid 1px; border-right: solid 1px;">
@@ -34,7 +36,13 @@
      <div class="col-12 d-flex justify-content-center mt-3"> <button type="button" class="btn btn-primary" id="add-product" value="{{product.id}}">Add to cart</button> </div>    </div>
   </div>
 </div>
-<br></br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</div>
 <script>
   console.log ({{product.id}})</script>
  <script>
@@ -60,4 +68,5 @@
     });
    })
 </script>  
+</div>
 {% endblock %}
