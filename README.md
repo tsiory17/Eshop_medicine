@@ -49,3 +49,19 @@ Eshop Medicine is an online platform designed to simplify the process of purchas
 - **Authentication**: Django Allauth
 - 
 ## Screenshots
+### Homepage 
+![Homepage](./media/1-Home.png) 
+### About Page 
+![About Page]( ./media/2-About.png) 
+### Category Page 
+![Category Page]( ./media/3-Category.png) 
+( ./media/7-digestive.png)
+### Login Page 
+![Login Page]( ./media/4-Login.png) 
+### Register Page 
+![Register Page]( ./media/5-Register.png) 
+### Product Details Page 
+![Product Details Page]( ./media/6-Product_details.png) 
+### Cart Summary 
+![Cart Summary]( ./media/8-CartSummary.png)
+
